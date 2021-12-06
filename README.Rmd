@@ -44,25 +44,25 @@ You can clone the repository from this URL:
 ## Usage
 Use `simulate_walk` to simulate a Gaussian random walk. You can define the length of the simulation in steps (`t`) and the mean (`mu`) and standard deviation (`sigma`) of the distribution used in the simulation.
 ```{r fig1, fig.cap="A random walk"}
-library(simplerc)
-t <- 100
-mu <- 0.5
-sigma <- 2
-walk <- simulate_walk(t, mu, sigma)
+#library(simplerc)
+#t <- 100
+#mu <- 0.5
+#sigma <- 2
+#walk <- simulate_walk(t, mu, sigma)
 ```
 
 To visualize the simulation, use the `plot_walk` function with the output of `simulate_walk`.
 ``` {r}
-plot_walk(walk)
+#plot_walk(walk)
 ```
 
 To estimate the parameters that were used for a simulation, use the `fit_walk` function with the output from `simulate_walk`. 
 ```{r fit}
-params <- fit_walk(walk)
-params
+#params <- fit_walk(walk)
+#params
 ```
 
-For the example above, the estimated parameters of $\mu$ = `r params$mu` and $\sigma$ = `r params$sigma` closely match the parameters used to generate the simulation.
+#For the example above, the estimated parameters of $\mu$ = r params$mu and $\sigma$ = r params$sigma closely match the parameters used to generate the simulation.
 
 ## Contents
 
