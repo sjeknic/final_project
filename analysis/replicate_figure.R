@@ -2,6 +2,15 @@ require(tidyverse)
 require(ggplot2)
 require(gridExtra)
 
+load_raw_data <- function(filename, data_path="data/raw_data") {
+  fname <- file.path(data_path, filename)
+  if(!file.exists(fname)) {
+    stop(cat("Could not find file ", fname), call. = FALSE)
+  }
+  df <- read.csv(file.path(data_path, filename))
+  df
+}
+
 st4 <- read.csv("data/raw_data/supp_table4.csv")
 st6 <- read.csv("data/raw_data/supp_table6.csv")
 
