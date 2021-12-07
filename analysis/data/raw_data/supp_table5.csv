@@ -1,0 +1,19 @@
+﻿,Average,SD,# genes,D,P-value
+Amino acid biosynthesis,4.1,3.8,44,0.1604,0.215
+"Biosynthesis of cofactors, prosthetic groups and carriers",3.7,2.8,32,0.9881,0.964
+Cell envelope,3.9,7.4,38,0.2686,0.009
+Cellular processes,4.1,4.4,44,0.1604,0.215
+Central intermediary metabolism,4.6,2.5,16,0.2597,0.206
+DNA metabolism,3.0,1.8,33,0.1194,0.731
+Energy metabolism,5.4,6.3,63,0.2033,0.014
+Fatty acid and phospho lipid metabolism,3.9,2.9,24,0.1003,0.965
+Hypothetical proteins,2.9,1.5,152,0.1122,0.077
+Mobile and extrachromosomal elements,,,1,,
+Protein fate,4.3,3.5,35,0.1813,0.199
+Protein synthesis,5.6,3.7,55,0.3233,0
+"Purines, pyrimidines, nucleosides and nucleotides",4.6,3.4,34,0.2701,0.014
+Regulatory function,2.5,1.2,38,0.2986,0.0002
+Transcription,3.1,1.7,17,0.1671,0.701
+Transport and binding proteins,5,5.5,48,0.1542,0.214
+Unclassified,3.6,3.8,74,0.1282,0.203
+All,3.9,4,748,,
