@@ -17,39 +17,15 @@ confirm_columns <- function(input_data, colname) {
   }
 }
 
-plot_histogram <- function(input_data, colname, binwidth=1) {
+plot_histogram <- function(input_data, colname, binwidth=0.5, xh=10, yh=160) {
   # Confirm that the columns exist
   confirm_columns(input_data, colname)
 
   # Generate basic plot object
-  fig <- ggplot(input_data, aes(x=colname)) + geom_histogram(binwidth=binwidth)
+  fig <- ggplot(input_data, aes_string(x=colname)) + geom_histogram(binwidth=binwidth) + xlim(0, xlim) + ylim(0, ylim)
+  fig
 }
-
-refine_plot <- function(plot, ...) {
-  for(arg in list(...)){
-    # Check that the argument is valid
-    if(!hasName(ggplot2, arg)){
-      stop(cat("Only ggplot2 functions can be used for formatting.",
-               "Could not find ", arg), call. = FALSE)
-    }
-
-    # Add the argument to the plot object
-    plot <- plot + arg
-  }
-  plot
-}
-
-st4 <- read.csv("analysis/data/raw_data/supp_table4.csv")
-st6 <- read.csv("analysis/data/raw_data/supp_table6.csv")
-
-fig3a <- ggplot(st4, aes(x=Avg.lifetime)) + geom_histogram(binwidth=0.5) +
-  xlim(0, 10) + ylim(0, 160)
-fig3b <- ggplot(st6, aes(x=Elongation.Rate..nt.s.)) + geom_histogram(binwidth=5) +
-  xlim(0, 75) + ylim(0, 70)
-
-grid.arrange(fig3a, fig3b, ncol=2)
 
 newst <- load_raw_data("supp_table4.csv")
-plot <- plot_histogram(newst, "Avg.lifetime")
-plot <- refine_plot(plot, geom_histogram(binwidth=0.5), xlim(0, 10), ylim(0, 160))
+plot <- plot_histogram(newst, "Avg.lifetime", binwidth=0.5, xh=10, yh=160)
 plot
