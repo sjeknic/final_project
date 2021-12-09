@@ -51,25 +51,35 @@ library(ggplot2)
 library(gridExtra)
 library(finalproject)
 ```
+
 Use `load_raw_data` to load the data you would like to plot for analysis. This function takes the file name and data path as its arguments.
 ```{r}
-
+load_raw_data("supp_table4.csv")
+newst <- load_raw_data("supp_table4.csv")
 
 ```
 
 To confirm the columns within the dataframe are appropriately labelled, you can call the `confirm_columns` function, this takes the output of the above function, and a specific column name as arguments, and checks that they exist within the dataframe.
 ```{r}
-
+confirm_columns(newst, "Avg.lifetime")
 ```
 
-To visualize the output, use the `plot_histogram` function with the `input_data` generated from `load_raw_data`.
-
-
-An example of this in action is used to plot the histogram from the supplemental table 4 within the original paper.
+To visualize the output, use the `plot_histogram` function with the `input_data` generated from `load_raw_data`. This is how we generate a basic histogram.
 ```{r}
-newst <- load_raw_data("supp_table4.csv")
-plot <- plot_histogram(newst, "Avg.lifetime", binwidth=0.5, xh=10, yh=160)
+plot <- plot_histogram(newst, "Avg.lifetime")
 plot
+```
+
+Other examples of this in action can be used to plot the histogram from the supplemental table 4 within the original paper. This also shows how variations in formatting can be achieved when passing the function different arguments to change the  parameters. 
+```{r}
+data_3a <- load_raw_data("supp_table4.csv")
+plot_3a <- plot_histogram(data_3a, "Avg.lifetime", binwidth=0.5, xh=10, yh=160)
+
+data_3b <- load_raw_data("supp_table6.csv")
+plot_3b <- plot_histogram(data_3b, "Elongation.Rate..nt.s.", binwidth=05, xh=75, yh=70)
+
+# Plot on same figure
+grid.arrange(plot_3a, plot_3b, ncol=2)
 ```
 
 ## Contents
