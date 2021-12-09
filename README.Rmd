@@ -20,7 +20,6 @@ Title <- "Genome-wide study of mRNA degradation and transcript elongation in Esc
 
 This Final Project is designed to replicate the analysis contained within "Genome-wide study of mRNA degradation and transcript elongation in Escherichia coli", specifically to replicate Figure 3a: Distributions of lifetimes and elongation rates measured for exponentially growing cells.
 
-
 ### How to cite
 
 Please cite this compendium as:
@@ -42,27 +41,49 @@ You can clone the repository from this URL:
 [DESCRIPTION](/DESCRIPTION) file).
 
 ## Usage
-Use `simulate_walk` to simulate a Gaussian random walk. You can define the length of the simulation in steps (`t`) and the mean (`mu`) and standard deviation (`sigma`) of the distribution used in the simulation.
-```{r fig1, fig.cap="A random walk"}
-#library(simplerc)
-#t <- 100
-#mu <- 0.5
-#sigma <- 2
-#walk <- simulate_walk(t, mu, sigma)
+Use `load_raw_data` to load the data you would like to plot for analysis. This function takes the file name and data path as its arguments.
+```{r}
+require(tidyverse)
+require(ggplot2)
+require(gridExtra)
+
+load_raw_data <- function(filename, data_path="analysis/data/raw_data") {
+  fname <- file.path(data_path, filename)
+  if(!file.exists(fname)) {
+    stop(cat("Could not find file ", fname), call. = FALSE)
+  }
+  df <- read.csv(file.path(data_path, filename))
+}
 ```
 
-To visualize the simulation, use the `plot_walk` function with the output of `simulate_walk`.
-``` {r}
-#plot_walk(walk)
+To confirm the columns within the dataframe are appropriately labelled, you can call the `confirm_columns` function, this takes the output of the above function, and a specific column name as arguments, and checks that they exist within the dataframe.
+```{r}
+confirm_columns <- function(input_data, colname) {
+  # Confirm that the column name exists
+  if(is.null(input_data[[colname]])) {
+    stop(cat("Missing column ", colname, "in data frame ", input_data), call. = FALSE)
+  }
+}
 ```
 
-To estimate the parameters that were used for a simulation, use the `fit_walk` function with the output from `simulate_walk`. 
-```{r fit}
-#params <- fit_walk(walk)
-#params
+To visualize the output, use the `plot_histogram` function with the `input_data` generated from `load_raw_data`.
+```{r}
+plot_histogram <- function(input_data, colname, binwidth=0.5, xh=10, yh=160) {
+  # Confirm that the columns exist
+  confirm_columns(input_data, colname)
+
+  # Generate basic plot object
+  fig <- ggplot(input_data, aes_string(x=colname)) + geom_histogram(binwidth=binwidth) + xlim(0, xlim) + ylim(0, ylim)
+  fig
+}
 ```
 
-#For the example above, the estimated parameters of $\mu$ = r params$mu and $\sigma$ = r params$sigma closely match the parameters used to generate the simulation.
+An example of this in action is used to plot the histogram from the supplemental table 4 within the original paper.
+```{r}
+newst <- load_raw_data("supp_table4.csv")
+plot <- plot_histogram(newst, "Avg.lifetime", binwidth=0.5, xh=10, yh=160)
+plot
+```
 
 ## Contents
 
