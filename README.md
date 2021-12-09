@@ -17,8 +17,8 @@ Please cite this compendium as:
 
 > Jeknic, Stevan et al. (2021). Genome-wide study of mRNA degradation
 > and transcript elongation in Escherichia coli - a replication.
-> Accessed 06 Dec 2021. Online at
-> <https://github.com/sjeknic/final_project>.
+> Accessed 09 Dec 2021. Online at
+> <https://github.com/sjeknic/finalproject>.
 
 ## How to run in your browser or download and run locally
 
@@ -29,43 +29,45 @@ software](https://cloud.r-project.org/) itself and optionally [RStudio
 Desktop](https://rstudio.com/products/rstudio/download/).
 
 You can clone the repository from this URL:
-[final_project](https://github.com/sjeknic/final_project). After
+[finalproject](https://github.com/sjeknic/finalproject). After
 unzipping: - open the `.Rproj` file in RStudio - run
 `devtools::install()` to ensure you have the packages this analysis
 depends on (also listed in the [DESCRIPTION](/DESCRIPTION) file).
 
 ## Usage
 
-Use `simulate_walk` to simulate a Gaussian random walk. You can define
-the length of the simulation in steps (`t`) and the mean (`mu`) and
-standard deviation (`sigma`) of the distribution used in the simulation.
-
 ``` r
-#library(simplerc)
-#t <- 100
-#mu <- 0.5
-#sigma <- 2
-#walk <- simulate_walk(t, mu, sigma)
+library(tidyverse)
+library(ggplot2)
+library(gridExtra)
+library(finalproject)
 ```
 
-To visualize the simulation, use the `plot_walk` function with the
-output of `simulate_walk`.
+Use `load_raw_data` to load the data you would like to plot for
+analysis. This function takes the file name and data path as its
+arguments.
+
+To confirm the columns within the dataframe are appropriately labelled,
+you can call the `confirm_columns` function, this takes the output of
+the above function, and a specific column name as arguments, and checks
+that they exist within the dataframe.
+
+To visualize the output, use the `plot_histogram` function with the
+`input_data` generated from `load_raw_data`.
+
+An example of this in action is used to plot the histogram from the
+supplemental table 4 within the original paper.
 
 ``` r
-#plot_walk(walk)
+newst <- load_raw_data("supp_table4.csv")
+#> [1] "analysis/data/raw_data/supp_table4.csv"
+plot <- plot_histogram(newst, "Avg.lifetime", binwidth=0.5, xh=10, yh=160)
+plot
+#> Warning: Removed 47 rows containing non-finite values (stat_bin).
+#> Warning: Removed 2 rows containing missing values (geom_bar).
 ```
 
-To estimate the parameters that were used for a simulation, use the
-`fit_walk` function with the output from `simulate_walk`.
-
-``` r
-#params <- fit_walk(walk)
-#params
-```
-
-#For the example above, the estimated parameters of *μ* = r params$mu
-and *σ* = r params$sigma closely match the parameters used to generate
-the simulation.
+![](analysis/figuresunnamed-chunk-3-1.png)<!-- -->
 
 ## Contents
 

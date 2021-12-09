@@ -4,6 +4,7 @@ require(gridExtra)
 
 load_raw_data <- function(filename, data_path="analysis/data/raw_data") {
   fname <- file.path(data_path, filename)
+  print(fname)
   if(!file.exists(fname)) {
     stop(cat("Could not find file ", fname), call. = FALSE)
   }

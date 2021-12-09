@@ -4,11 +4,15 @@ output: github_document
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-```{r, echo = FALSE}
+```{r setup, echo = FALSE, include=FALSE}
+devtools::document()
+devtools::build()
+devtools::load_all()
+
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path = "README-"
+  fig.path = "analysis/figures"
 )
 # Please put your title here to include it in the file below.
 Title <- "Genome-wide study of mRNA degradation and transcript elongation in Escherichia coli - a replication"
@@ -25,7 +29,7 @@ This Final Project is designed to replicate the analysis contained within "Genom
 Please cite this compendium as:
 
 > Jeknic, Stevan et al. (2021). Genome-wide study of mRNA degradation and transcript elongation in Escherichia coli - a replication. Accessed `r format(Sys.Date(), "%d %b %Y")`.
-Online at <https://github.com/sjeknic/final_project>.
+Online at <https://github.com/sjeknic/finalproject>.
 
 ## How to run in your browser or download and run locally
 
@@ -35,48 +39,31 @@ installed on your computer the [R software](https://cloud.r-project.org/)
 itself and optionally [RStudio Desktop](https://rstudio.com/products/rstudio/download/).
 
 You can clone the repository from this URL:
-[final_project](https://github.com/sjeknic/final_project). After unzipping:
+[finalproject](https://github.com/sjeknic/finalproject). After unzipping:
 - open the `.Rproj` file in RStudio
 - run `devtools::install()` to ensure you have the packages this analysis depends on (also listed in the
 [DESCRIPTION](/DESCRIPTION) file).
 
 ## Usage
+```{r load}
+library(tidyverse)
+library(ggplot2)
+library(gridExtra)
+library(finalproject)
+```
 Use `load_raw_data` to load the data you would like to plot for analysis. This function takes the file name and data path as its arguments.
 ```{r}
-require(tidyverse)
-require(ggplot2)
-require(gridExtra)
 
-load_raw_data <- function(filename, data_path="analysis/data/raw_data") {
-  fname <- file.path(data_path, filename)
-  if(!file.exists(fname)) {
-    stop(cat("Could not find file ", fname), call. = FALSE)
-  }
-  df <- read.csv(file.path(data_path, filename))
-}
+
 ```
 
 To confirm the columns within the dataframe are appropriately labelled, you can call the `confirm_columns` function, this takes the output of the above function, and a specific column name as arguments, and checks that they exist within the dataframe.
 ```{r}
-confirm_columns <- function(input_data, colname) {
-  # Confirm that the column name exists
-  if(is.null(input_data[[colname]])) {
-    stop(cat("Missing column ", colname, "in data frame ", input_data), call. = FALSE)
-  }
-}
+
 ```
 
 To visualize the output, use the `plot_histogram` function with the `input_data` generated from `load_raw_data`.
-```{r}
-plot_histogram <- function(input_data, colname, binwidth=0.5, xh=10, yh=160) {
-  # Confirm that the columns exist
-  confirm_columns(input_data, colname)
 
-  # Generate basic plot object
-  fig <- ggplot(input_data, aes_string(x=colname)) + geom_histogram(binwidth=binwidth) + xlim(0, xlim) + ylim(0, ylim)
-  fig
-}
-```
 
 An example of this in action is used to plot the histogram from the supplemental table 4 within the original paper.
 ```{r}
