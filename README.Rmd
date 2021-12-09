@@ -4,11 +4,15 @@ output: github_document
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-```{r, echo = FALSE}
+```{r setup, echo = FALSE, include=FALSE}
+devtools::document()
+devtools::build()
+devtools::load_all()
+
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path = "README-"
+  fig.path = "analysis/figures"
 )
 # Please put your title here to include it in the file below.
 Title <- "Genome-wide study of mRNA degradation and transcript elongation in Escherichia coli - a replication"
@@ -20,13 +24,12 @@ Title <- "Genome-wide study of mRNA degradation and transcript elongation in Esc
 
 This Final Project is designed to replicate the analysis contained within "Genome-wide study of mRNA degradation and transcript elongation in Escherichia coli", specifically to replicate Figure 3a: Distributions of lifetimes and elongation rates measured for exponentially growing cells.
 
-
 ### How to cite
 
 Please cite this compendium as:
 
 > Jeknic, Stevan et al. (2021). Genome-wide study of mRNA degradation and transcript elongation in Escherichia coli - a replication. Accessed `r format(Sys.Date(), "%d %b %Y")`.
-Online at <https://github.com/sjeknic/final_project>.
+Online at <https://github.com/sjeknic/finalproject>.
 
 ## How to run in your browser or download and run locally
 
@@ -36,33 +39,38 @@ installed on your computer the [R software](https://cloud.r-project.org/)
 itself and optionally [RStudio Desktop](https://rstudio.com/products/rstudio/download/).
 
 You can clone the repository from this URL:
-[final_project](https://github.com/sjeknic/final_project). After unzipping:
+[finalproject](https://github.com/sjeknic/finalproject). After unzipping:
 - open the `.Rproj` file in RStudio
 - run `devtools::install()` to ensure you have the packages this analysis depends on (also listed in the
 [DESCRIPTION](/DESCRIPTION) file).
 
 ## Usage
-Use `simulate_walk` to simulate a Gaussian random walk. You can define the length of the simulation in steps (`t`) and the mean (`mu`) and standard deviation (`sigma`) of the distribution used in the simulation.
-```{r fig1, fig.cap="A random walk"}
-#library(simplerc)
-#t <- 100
-#mu <- 0.5
-#sigma <- 2
-#walk <- simulate_walk(t, mu, sigma)
+```{r load}
+library(tidyverse)
+library(ggplot2)
+library(gridExtra)
+library(finalproject)
+```
+Use `load_raw_data` to load the data you would like to plot for analysis. This function takes the file name and data path as its arguments.
+```{r}
+
+
 ```
 
-To visualize the simulation, use the `plot_walk` function with the output of `simulate_walk`.
-``` {r}
-#plot_walk(walk)
+To confirm the columns within the dataframe are appropriately labelled, you can call the `confirm_columns` function, this takes the output of the above function, and a specific column name as arguments, and checks that they exist within the dataframe.
+```{r}
+
 ```
 
-To estimate the parameters that were used for a simulation, use the `fit_walk` function with the output from `simulate_walk`. 
-```{r fit}
-#params <- fit_walk(walk)
-#params
-```
+To visualize the output, use the `plot_histogram` function with the `input_data` generated from `load_raw_data`.
 
-#For the example above, the estimated parameters of $\mu$ = r params$mu and $\sigma$ = r params$sigma closely match the parameters used to generate the simulation.
+
+An example of this in action is used to plot the histogram from the supplemental table 4 within the original paper.
+```{r}
+newst <- load_raw_data("supp_table4.csv")
+plot <- plot_histogram(newst, "Avg.lifetime", binwidth=0.5, xh=10, yh=160)
+plot
+```
 
 ## Contents
 
