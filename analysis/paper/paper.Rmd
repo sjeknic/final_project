@@ -1,5 +1,5 @@
 ---
-title: "Title Goes Here"
+title: "Genome-wide mRNA lifetimes and elongation rates"
 author:
   - Gwanggyu Sun:
       email: ggsun@stanford.edu
@@ -26,8 +26,6 @@ output:
       - --lua-filter=../templates/pagebreak.lua
 bibliography: references.bib
 csl: "../templates/nature.csl" # Insert path for the bib-style
-abstract: |
-  Text of abstract
 keywords: |
   transcription; mRNA degradation; elongation
 highlights: |
@@ -50,7 +48,6 @@ knitr::opts_chunk$set(
   warning = FALSE,
   message = FALSE,
   echo = FALSE,
-  results = FALSE,
   comment = "#>",
   fig.path = "../figures/",
   dpi = 300
@@ -62,8 +59,8 @@ knitr::opts_chunk$set(
 ```{r load, echo = FALSE, results = FALSE, warning = FALSE, message=FALSE}
 library(tidyverse)
 library(ggplot2)
-library(gridExtra)
 library(finalproject)
+library(gridExtra)
 ```
 # Introduction
 
@@ -74,8 +71,6 @@ has shown that this assumption is not valid. As such, we focused on using some o
 these recently collected data to visualize the distribution of individual mRNA
 lifetimes and elongation rates.
 
-# Background
-
 # Methods
 
 We are using RNA-seq data that were collected in exponentially growing *E*. *coli*
@@ -84,29 +79,18 @@ cells by Chen et al.[@Chen2015].
 # Results
 
 <!-- Here's some example analysis code: -->
+```{r demo-plot, fig.cap="Plot of mRNA lifetimes (left) and elongation rates (right)", results=FALSE, echo=TRUE}
+data_3a <- load_raw_data("supp_table4.csv")
+data_3b <- load_raw_data("supp_table6.csv")
 
-```{r get-data, eval = FALSE}
-# Note the path that we need to use to access our data files when rendering this document
-my_data <- read.csv(here::here('analysis/data/raw_data/my_csv_file.csv'))
+plot_3a <- plot_histogram(data_3a, "Avg.lifetime", binwidth=0.5, xh=10, yh=160)
+plot_3b <- plot_histogram(data_3b, "Elongation.Rate..nt.s.", binwidth=5, xh=75, yh=70)
+grid.arrange(plot_3a, plot_3b, ncol=2)
 ```
-
-```{r demo-plot, fig.cap="A plot of random numbers"}
-plot(rnorm(10))
-```
-
-Figure \@ref(fig:demo-plot) shows how we can have a caption and cross-reference for a plot
-
-```{r demo-inline-code}
-x <- round(pi, 2)
-```
-
-Here is an example of inline code `r x` in the middle of a sentence. 
-
-# Discussion
-
-# Conclusion
 
 # Acknowledgements
+
+Elliott Hazen, Max Czapanskiy, Maurice Goodman, and Cheyenne Payne for an awesome class!
 
 <!-- The following line inserts a page break  -->
 
