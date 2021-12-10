@@ -1,17 +1,20 @@
 ---
 title: "Title Goes Here"
 author:
-  - Myfirstname Mylastname:
-      email: fl@oneplace.edu
-      institute: [UofO]
+  - Gwanggyu Sun:
+      email: ggsun@stanford.edu
+      institute: [SU]
       correspondence: true
-  - Yourfirstname Yourlastname:
-      email: fl@another.edu
-      institute: [UofA]
-      correspondence: false
+  - Stevan Jeknic:
+      email: sjeknic@stanford.edu
+      institute: [SU]
+      correspondence: true
+  - Tom Handley:
+      email: thandley@stanford.edu
+      institute: [SU]
+      correspondence: true
 institute:
-  - UofO: University of One Place
-  - UofA: University of Another Place
+  - SU: Stanford University
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: 
     bookdown::word_document2:
@@ -22,7 +25,7 @@ output:
       - --lua-filter=../templates/author-info-blocks.lua
       - --lua-filter=../templates/pagebreak.lua
 bibliography: references.bib
-csl: "../templates/journal-of-archaeological-science.csl" # Insert path for the bib-style
+csl: "../templates/nature.csl" # Insert path for the bib-style
 abstract: |
   Text of abstract
 keywords: |
@@ -57,7 +60,7 @@ knitr::opts_chunk$set(
 
 # Introduction
 
-Here is a citation [@Marwick2017]
+Here is a citation [@Chen2015]
 
 # Background
 
