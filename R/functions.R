@@ -1,23 +1,24 @@
 #' Load Raw Data
 #'
-#' \code{load_raw_data} Pulls data from a file path to be passed to other functions.
+#' `load_raw_data()` Pulls data from a file path to be passed to other functions.
 #'
 #' This function takes the file name and data path is a generic function: methods can be defined for it directly or via the
-#' \code{\link{ggplot2}} group generic. For this to work properly, the arguments
-#' \code{...} should be generated from the functions \code{\link{load_raw_data},
-#' and \code{\link{confirm_columns}.
+#' `\link{ggplot2}` group generic. For this to work properly, the arguments
+#' `...` should be generated from the functions `\link{load_raw_data}`,
+#' and `\link{confirm_columns}`.
 #'
-#' @param ... Name of the file - this must be in the form of a string.
-#' @param ... The file path is an optional argument and is set to call from within the directory
-#' @return If all inputs are valid the output will produce a file which can be passed to \code{\link{plot_histogram}.
+#' @param filename Name of the file - this must be in the form of a string.
+#' @param data_path The file path is an optional argument and is set to call from within the directory
+#' @return If all inputs are valid the output will produce a file which can be passed to `\link{plot_histogram}`.
 #'   If inputs are invalid, an error message will be generated.
+#'
 #' @examples
 #' load_raw_data("supp_table4.csv")
-#'
 #' \dontrun{
 #' load_raw_data("file name which does not exist")
 #' }
-
+#'
+#' @export
 load_raw_data <- function(filename, data_path="analysis/data/raw_data") {
   fname <- file.path(data_path, filename)
   print(fname)
@@ -38,13 +39,14 @@ load_raw_data <- function(filename, data_path="analysis/data/raw_data") {
 #' @param ... Column name - this must be in the form of a string.
 #' @return If all inputs are valid the output will produce a file which can be passed to \code{\link{plot_histogram}.
 #'   If inputs are invalid, an error message will be generated.
+#'
 #' @examples
 #' confirm_columns("supp_table4.csv")
-#'
 #' \dontrun{
 #' confirm_columns(column, "Missing column")
 #' }
-
+#'
+#' @export
 confirm_columns <- function(input_data, colname) {
   # Confirm that the column name exists
   if(is.null(input_data[[colname]])) {
@@ -67,14 +69,15 @@ confirm_columns <- function(input_data, colname) {
 #' @param ... The column name which should be a string
 #' @return If all inputs are valid the output will produce a simple histogram.
 #'   If inputs are invalid, an error message will be generated.
-#' @examples
-#' plot_histogram(newst, "Avg.lifetime", binwidth=0.5, xh=10, yh=160)
-#'
 #' @import ggplot2
 #'
+#' @examples
+#' plot_histogram(newst, "Avg.lifetime", binwidth=0.5, xh=10, yh=160
 #' \dontrun{
 #' plot_histogram("a")
 #' }
+#'
+#' @export
 plot_histogram <- function(input_data, colname, binwidth=0.5, xh=10, yh=160) {
   # Confirm that the columns exist
   confirm_columns(input_data, colname)

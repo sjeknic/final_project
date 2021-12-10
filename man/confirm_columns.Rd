@@ -21,8 +21,8 @@ If inputs are invalid, an error message will be generated.
 }
 \examples{
 confirm_columns("supp_table4.csv")
-
 \dontrun{
 confirm_columns(column, "Missing column")
 }
+
 }

@@ -29,9 +29,9 @@ csl: "../templates/nature.csl" # Insert path for the bib-style
 abstract: |
   Text of abstract
 keywords: |
-  keyword 1; keyword 2; keyword 3
+  transcription; mRNA degradation; elongation
 highlights: |
-  These are the highlights. 
+  Quantitative halflives and elongation rates for individual mRNA species.
 ---
 
 <!-- This is the format for text comments that will be ignored during renderings. Do not put R code in these comments because it will not be ignored. -->
@@ -50,21 +50,36 @@ knitr::opts_chunk$set(
   warning = FALSE,
   message = FALSE,
   echo = FALSE,
+  results = FALSE,
   comment = "#>",
   fig.path = "../figures/",
   dpi = 300
 )
 ```
 
-<!-- The actual document text starts here: -->
 
+<!-- The actual document text starts here: -->
+```{r load, echo = FALSE, results = FALSE, warning = FALSE, message=FALSE}
+library(tidyverse)
+library(ggplot2)
+library(gridExtra)
+library(finalproject)
+```
 # Introduction
 
-Here is a citation [@Chen2015]
+Quantitative data regarding the rates of mRNA degradation and transcript elongation
+are sparse. Typically, mathematical models involving these processes, use a single
+rate constant that applies to all mRNA species. However, recent work[@Chen2015] 
+has shown that this assumption is not valid. As such, we focused on using some of
+these recently collected data to visualize the distribution of individual mRNA
+lifetimes and elongation rates.
 
 # Background
 
 # Methods
+
+We are using RNA-seq data that were collected in exponentially growing *E*. *coli*
+cells by Chen et al.[@Chen2015].
 
 # Results
 

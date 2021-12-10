@@ -7,22 +7,27 @@
 load_raw_data(filename, data_path = "analysis/data/raw_data")
 }
 \arguments{
-\item{...}{The file path is an optional argument and is set to call from within the directory}
+\item{filename}{Name of the file - this must be in the form of a string.}
+
+\item{data_path}{The file path is an optional argument and is set to call from within the directory}
 }
 \value{
-If all inputs are valid the output will produce a file which can be passed to \code{\link{plot_histogram}.
+If all inputs are valid the output will produce a file which can be passed to \verb{\link{plot_histogram}}.
 If inputs are invalid, an error message will be generated.
 }
 \description{
 \code{load_raw_data} Pulls data from a file path to be passed to other functions.
 }
 \details{
-
+This function takes the file name and data path is a generic function: methods can be defined for it directly or via the
+\verb{\link{ggplot2}} group generic. For this to work properly, the arguments
+\code{...} should be generated from the functions \verb{\link{load_raw_data}},
+and \verb{\link{confirm_columns}}.
 }
 \examples{
 load_raw_data("supp_table4.csv")
-
 \dontrun{
 load_raw_data("file name which does not exist")
 }
+
 }

@@ -20,6 +20,9 @@ If inputs are invalid, an error message will be generated.
 
 }
 \examples{
-plot_histogram(newst, "Avg.lifetime", binwidth=0.5, xh=10, yh=160)
+plot_histogram(newst, "Avg.lifetime", binwidth=0.5, xh=10, yh=160
+\dontrun{
+plot_histogram("a")
+}
 
 }
