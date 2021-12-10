@@ -5,9 +5,6 @@ output: github_document
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 ```{r setup, echo = FALSE, include=FALSE}
-devtools::document()
-devtools::build()
-devtools::load_all()
 
 knitr::opts_chunk$set(
   collapse = TRUE,
@@ -45,7 +42,7 @@ You can clone the repository from this URL:
 [DESCRIPTION](/DESCRIPTION) file).
 
 ## Usage
-```{r load}
+```{r load, message=FALSE, warning=FALSE}
 library(tidyverse)
 library(ggplot2)
 library(gridExtra)
@@ -65,13 +62,13 @@ confirm_columns(newst, "Avg.lifetime")
 ```
 
 To visualize the output, use the `plot_histogram` function with the `input_data` generated from `load_raw_data`. This is how we generate a basic histogram.
-```{r}
+```{r, message=FALSE, warning=FALSE}
 plot <- plot_histogram(newst, "Avg.lifetime")
 plot
 ```
 
 Other examples of this in action can be used to plot the histogram from the supplemental table 4 within the original paper. This also shows how variations in formatting can be achieved when passing the function different arguments to change the  parameters. 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 data_3a <- load_raw_data("supp_table4.csv")
 plot_3a <- plot_histogram(data_3a, "Avg.lifetime", binwidth=0.5, xh=10, yh=160)
 

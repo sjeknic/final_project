@@ -17,7 +17,7 @@ Please cite this compendium as:
 
 > Jeknic, Stevan et al. (2021). Genome-wide study of mRNA degradation
 > and transcript elongation in Escherichia coli - a replication.
-> Accessed 09 Dec 2021. Online at
+> Accessed 10 Dec 2021. Online at
 > <https://github.com/sjeknic/finalproject>.
 
 ## How to run in your browser or download and run locally
@@ -70,8 +70,6 @@ basic histogram.
 ``` r
 plot <- plot_histogram(newst, "Avg.lifetime")
 plot
-#> Warning: Removed 47 rows containing non-finite values (stat_bin).
-#> Warning: Removed 2 rows containing missing values (geom_bar).
 ```
 
 ![](analysis/figuresunnamed-chunk-3-1.png)<!-- -->
@@ -92,10 +90,6 @@ plot_3b <- plot_histogram(data_3b, "Elongation.Rate..nt.s.", binwidth=05, xh=75,
 
 # Plot on same figure
 grid.arrange(plot_3a, plot_3b, ncol=2)
-#> Warning: Removed 47 rows containing non-finite values (stat_bin).
-#> Warning: Removed 2 rows containing missing values (geom_bar).
-
-#> Warning: Removed 2 rows containing missing values (geom_bar).
 ```
 
 ![](analysis/figuresunnamed-chunk-4-1.png)<!-- -->
