@@ -1,7 +1,3 @@
-#require(tidyverse)
-#require(ggplot2)
-#require(gridExtra)
-
 #' Load Raw Data
 #'
 #' \code{load_raw_data} Pulls data from a file path to be passed to other functions.
@@ -88,13 +84,3 @@ plot_histogram <- function(input_data, colname, binwidth=0.5, xh=10, yh=160) {
     geom_histogram(binwidth=binwidth) + xlim(0, xh) + ylim(0, yh)
   fig
 }
-# This goes in paper.Rmd
-# # Load data and make plots
-# data_3a <- load_raw_data("supp_table4.csv")
-# plot_3a <- plot_histogram(data_3a, "Avg.lifetime", binwidth=0.5, xh=10, yh=160)
-#
-# data_3b <- load_raw_data("supp_table6.csv")
-# plot_3b <- plot_histogram(data_3b, "Elongation.Rate..nt.s.", binwidth=05, xh=75, yh=70)
-#
-# # Plot on same figure
-# grid.arrange(plot_3a, plot_3b, ncol=2)
